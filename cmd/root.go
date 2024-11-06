@@ -31,6 +31,7 @@ func init() {
 	rootCmd.MarkPersistentFlagRequired("output-archive")
 	rootCmd.AddCommand(fetchAttachmentsCmd)
 	rootCmd.AddCommand(fetchEmailsCmd)
+	rootCmd.AddCommand(fetchPrivateChannelsCmd)
 	rootCmd.AddCommand(fetchProfilePicturesCmd)
 	retryClient := retryablehttp.NewClient()
 	retryClient.RetryMax = 10
