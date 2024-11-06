@@ -54,6 +54,13 @@ You may need an API token to access some attachments. You can add `--api-token x
 to this command if so, in the same way as for `fetch-emails`.
 
 
+### Add all the Profile Pictures to your export.
+
+To fetch all the profile pics referenced in your Slack team export and add them to the archive,
+use this command:
+
+    ./slack-advanced-exporter --input-archive your-slack-team-export.zip --output-archive export-with-profile-pics.zip fetch-profile-pictures
+
 
 Problems
 --------
