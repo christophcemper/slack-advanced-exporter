@@ -45,7 +45,7 @@ func fetchProfilePics(cmd *cobra.Command, args []string) error {
 
 	// Run through all the files in the input archive.
 	for _, file := range r.File {
-		verbosePrintln(fmt.Sprintf("Processing file: %s\n", file.Name))
+		// verbosePrintln(fmt.Sprintf("Processing file: %s\n", file.Name))
 
 		// Open the file from the input archive.
 		inReader, err := file.Open()

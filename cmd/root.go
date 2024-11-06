@@ -20,7 +20,7 @@ var rootCmd = &cobra.Command{
 	Long: `The Slack Advanced Exporter is a tool for supplementing official data exports from Slack with the other bits
 and pieces that these don't include.
 
-Version: 0.4.0`,
+Version: 0.5.1`,
 }
 
 func init() {
