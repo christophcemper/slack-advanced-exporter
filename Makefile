@@ -39,3 +39,16 @@ clean: ## Remove all build and release artefacts
 	rm -rf release
 	rm -rf slack-advanced-exporter
 	rm -rf slack-advanced-exporter.exe
+
+
+deploy-local-mac-arm: build-mac-arm
+	# move to parent directories for mac and linux
+	mkdir -p ../bin/mac 
+	mv build/slack-advanced-exporter ../bin/mac
+
+deploy-local-linux: build-linux
+	# move to parent directories for mac and linux
+	mkdir -p ../bin/linux
+	mv build/slack-advanced-exporter ../bin/linux
+
+deploy-local: deploy-local-mac-arm deploy-local-linux
