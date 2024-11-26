@@ -117,29 +117,37 @@ func downloadPictures(input io.Reader, w *zip.Writer) error {
 
 					req, err := http.NewRequest("GET", image_url, nil)
 					if err != nil {
-						return fmt.Errorf("Got error %s when building the request", err.Error())
+						log.Printf("Error building request for user %q: %v", name, err)
+						continue
 					}
 					log.Printf("Downloading profile picture for %q", name)
 
 					response, err := httpClient.Do(req)
 					if err != nil {
-						log.Printf("Failed to download profile picture for user %q from %s", userid, image_url)
+						log.Printf("Failed to download profile picture for user %q from %s: %v", userid, image_url, err)
+						continue
 					}
 					defer response.Body.Close()
+
+					if response.StatusCode != http.StatusOK {
+						log.Printf("Failed to download profile picture for user %q, status: %d", userid, response.StatusCode)
+						continue
+					}
 
 					picFileName := "profile_pictures/" + userid + extension
 					profile["image_path"] = picFileName
 
-					// Save the file to the output zip file.
 					outFile, err := w.Create(picFileName)
 					if err != nil {
-						return fmt.Errorf("Failed to write profile picture to zip file for %q from %s", userid, image_url)
-					}
-					_, err = io.Copy(outFile, response.Body)
-					if err != nil {
-						log.Print("++++++ Failed to write the downloaded file to the output archive: " + image_url + "\n\n" + err.Error() + "\n")
+						log.Printf("Failed to create profile picture in zip for %q: %v", userid, err)
+						continue
 					}
 
+					_, err = io.Copy(outFile, response.Body)
+					if err != nil {
+						log.Printf("Failed to write profile picture for %q: %v", userid, err)
+						continue
+					}
 				} else {
 					log.Printf("Skipping %q, no suitable profile picture found", userid)
 				}
