@@ -82,4 +82,8 @@ Pull requests are welcome. Please ensure that you comply with the requirements b
   tool - if it's already in the official export, there's no need for it here.
 * Ensure you only request what is needed, to avoid unnecessary load being placed on servers.
 
+License
+-------
+
+Non open, private non-exclusive, annual perpetual license per master license terms between Christoph C. Cemper and licensee.
 
